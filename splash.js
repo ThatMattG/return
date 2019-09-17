@@ -53,6 +53,8 @@ function handleSplashClick(event) {
   if (elementClicked) {
     drawSplash();
   } else {
+    // Remove click listener and start game
+    canv.removeEventListener("click", handleSplashClick);
     startGame(strategySelector1.curr, strategySelector2.curr);
   }
 }
