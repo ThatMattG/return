@@ -1,12 +1,11 @@
 class IterativeClickable {
 
-  constructor(object, xStart, yStart, width, height, handleClickMethod) {
+  constructor(object, xStart, yStart, width, height) {
     this.object = object;
     this.xStart = xStart;
     this.yStart = yStart;
     this.width = width;
     this.height = height;
-    // this.handleClick = this.object.handleClickMethod();
   }
 
   handleClick() {
@@ -25,10 +24,6 @@ class IterativeClickable {
       return true;
     }
     return false;
-  }
-
-  get curr() {
-    return this.object.curr;
   }
 
   get toString() {

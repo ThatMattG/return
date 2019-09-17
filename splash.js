@@ -5,7 +5,8 @@ function startSplash() {
   makeModes(splashScreenElements);
 
   // Handle clicks
-  canv.addEventListener("click", handleSplashClick, false);
+  canv.addEventListener("click", handleSplashClick);
+  canv.addEventListener("touchstart", handleSplashTouch);
 
   drawSplash();
 }
@@ -40,10 +41,24 @@ function handleSplashClick(event) {
   clickX = event.pageX;
   clickY = event.pageY;
 
+  handleSplashInteraction(clickX, clickY);
+}
+
+function handleSplashTouch(event) {
+  clickX = event.changedTouches[0].pageX;
+  clickY = event.changedTouches[0].pageY;
+
+  handleSplashInteraction(clickX, clickY);
+}
+
+function handleSplashInteraction(clickX, clickY) {
+  console.log(event);
+
   let elementClicked = false;
+
   for (let index in splashScreenElements) {
     let element = splashScreenElements[index];
-    if (element.withinBoundary(clickX, clickY)){
+    if (element.withinBoundary(clickX, clickY)) {
       element.handleClick();
       elementClicked = true;
       break;
@@ -55,6 +70,7 @@ function handleSplashClick(event) {
   } else {
     // Remove click listener and start game
     canv.removeEventListener("click", handleSplashClick);
+    canv.removeEventListener("touchstart", handleSplashTouch);
     startGame(strategySelector1.curr, strategySelector2.curr);
   }
 }
