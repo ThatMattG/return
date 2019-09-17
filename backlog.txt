@@ -1,0 +1,14 @@
+DONE
+- scoring
+- paddle motion (keyup)
+- alternate ball start direction
+- pause screen
+- random ball colours
+- start screen
+- 1 player mode (decision-making)
+
+DOING
+
+TO DO
+- click zones? (touch screen)
+- winner (10 pts?)
