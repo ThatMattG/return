@@ -1,14 +1,11 @@
-class IterativeClickable {
+class IterativeClickable extends GraphicRectangle {
 
-  constructor(object, xStart, yStart, width, height) {
+  constructor(object, xStart, yStart, width, height, fillColor, strokeColor) {
+    super(xStart, yStart, width, height, fillColor, strokeColor);
     this.object = object;
-    this.xStart = xStart;
-    this.yStart = yStart;
-    this.width = width;
-    this.height = height;
   }
 
-  handleClick() {
+  handleClickDown() {
     this.object.next();
   }
 
@@ -16,17 +13,8 @@ class IterativeClickable {
     return this.object.curr;
   }
 
-  withinBoundary(x, y) {
-    if (x >= this.xStart
-      && x <= this.xStart + this.width
-      && y >= this.yStart
-      && y <= this.yStart + this.height){
-      return true;
-    }
-    return false;
-  }
-
   get toString() {
     return this.object.toString;
   }
+
 }

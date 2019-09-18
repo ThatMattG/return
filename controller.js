@@ -1,15 +1,64 @@
 var interval;
 var paused = true;
+var gameScreenClickables = [];
 
 function startGame(strategy1, strategy2) {
   makeGameElements(strategy1, strategy2);
+  makeGraphicElements(gameScreenClickables);
 
-  document.addEventListener('keydown', bindPaddleKeys);
-  document.addEventListener('keyup', bindPaddleKeysUp);
+  document.addEventListener('keydown', handleKeyDown);
+  document.addEventListener('keyup', handleKeyUp);
+  canv.addEventListener("mousedown", handleGameMouseDown);
+  canv.addEventListener("mouseup", handleGameMouseUp);
 
   resumeGame();
   paused = false;
 }
+
+
+function makeGraphicElements(clickables) {
+  let clickableLU = new OnScreenPaddleControls(0, 0, canv.width /2, canv.height / 2, paddle1, "U");
+  let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height / 2, paddle1, "D");
+  let clickableRU = new OnScreenPaddleControls(canv.width / 2, 0, canv.width /2, canv.height / 2, paddle2, "U");
+  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width /2, canv.height / 2, paddle2, "D");
+  clickables.push(clickableLU);
+  clickables.push(clickableLD);
+  clickables.push(clickableRU);
+  clickables.push(clickableRD);
+}
+
+
+
+
+function handleGameMouseDown(event) {
+  clickX = event.pageX;
+  clickY = event.pageY;
+
+  handleGameInteraction(clickX, clickY, "handleClickDown");
+}
+
+function handleGameMouseUp(event) {
+  clickX = event.pageX;
+  clickY = event.pageY;
+
+  handleGameInteraction(clickX, clickY, "handleClickUp");
+}
+
+function handleGameInteraction(clickX, clickY, handleMethod) {
+  console.log(clickX, clickY, handleMethod);
+
+  for (let index in gameScreenClickables) {
+    let element = gameScreenClickables[index];
+
+    if (element.withinBoundary(clickX, clickY)) {
+      element[handleMethod]();
+      break;
+    }
+  }
+}
+
+
+
 
 function resumeGame() {
   interval = setInterval(newFrame, 1000 / FPS);
@@ -19,7 +68,7 @@ function resumeGame() {
 // Keyboard bindings
 // ============================================================
 
-function bindPaddleKeys(e) {
+function handleKeyDown(e) {
   switch (e.key) {
     case "q":
       // paddle1 up
@@ -43,7 +92,7 @@ function bindPaddleKeys(e) {
   }
 }
 
-function bindPaddleKeysUp(e) {
+function handleKeyUp(e) {
   if (e.key === "q" || e.key === "a") {
     paddle1.stop();
   }

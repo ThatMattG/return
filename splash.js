@@ -6,6 +6,8 @@ function startSplash() {
 
   // Handle clicks
   canv.addEventListener("click", handleSplashClick);
+
+  // // Enabling touchstart listener? Enable the removeEventListener in handleSplashInteraction()
   // canv.addEventListener("touchstart", handleSplashTouch);
 
   drawSplash();
@@ -22,7 +24,9 @@ function makeModes(elements) {
       xStart,
       yStart,
       width,
-      height
+      height,
+      "beige",
+      "black"
   );
   elements.push(strategySelector1);
 
@@ -31,7 +35,9 @@ function makeModes(elements) {
       canv.width - xStart - width,
       yStart,
       width,
-      height
+      height,
+      "beige",
+      "black"
   );
   elements.push(strategySelector2);
 
@@ -59,7 +65,7 @@ function handleSplashInteraction(clickX, clickY) {
   for (let index in splashScreenElements) {
     let element = splashScreenElements[index];
     if (element.withinBoundary(clickX, clickY)) {
-      element.handleClick();
+      element.handleClickDown();
       elementClicked = true;
       break;
     }
@@ -70,7 +76,7 @@ function handleSplashInteraction(clickX, clickY) {
   } else {
     // Remove click listener and start game
     canv.removeEventListener("click", handleSplashClick);
-    canv.removeEventListener("touchstart", handleSplashTouch);
+    // canv.removeEventListener("touchstart", handleSplashTouch);
     startGame(strategySelector1.curr, strategySelector2.curr);
   }
 }

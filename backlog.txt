@@ -8,7 +8,7 @@ DONE
 - 1 player mode (decision-making)
 
 DOING
-- click zones? (touch screen)
+- click zones (touch screen)
 
 TO DO
 - winner (10 pts?)

@@ -20,7 +20,6 @@ Paddle.prototype.moveDown = function() {
 Paddle.prototype.move = function(dir) {
   this.y += dir * this.maxSpeed;
 
-  // this.y += this.speed;
   if (this.y < this.yMin) {
     this.y = this.yMin;
   }

@@ -20,15 +20,23 @@ function drawModeSelectors() {
   drawStrategySelector(strategySelector2);
 }
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 function drawStrategySelector(selector) {
-  ctx.fillStyle = "beige";
-  ctx.fillRect(selector.xStart, selector.yStart, selector.width, selector.height);
+  selector.draw();
 
   ctx.font = "bold 40px Courier";
   ctx.fillStyle = "orange";
   ctx.strokeStyle = "black";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(selector.toString, selector.xStart + selector.width / 2, selector.yStart + selector.height / 2);
-  ctx.strokeText(selector.toString, selector.xStart + selector.width / 2, selector.yStart + selector.height / 2);
+  ctx.fillText(selector.toString, selector.xMid, selector.yMid);
+  ctx.strokeText(selector.toString, selector.xMid, selector.yMid);
 }
