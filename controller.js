@@ -98,7 +98,7 @@ function handleGameTouchUp(event) {
 
 
 function handleGameInteraction(clickX, clickY, handleMethod) {
-  document.write(clickX, clickY, handleMethod);
+  console.log(clickX, clickY, handleMethod);
 
   for (let index in gameScreenClickables) {
     let element = gameScreenClickables[index];
