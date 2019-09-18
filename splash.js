@@ -6,7 +6,7 @@ function startSplash() {
 
   // Handle clicks
   canv.addEventListener("click", handleSplashClick);
-  canv.addEventListener("touchstart", handleSplashTouch);
+  // canv.addEventListener("touchstart", handleSplashTouch);
 
   drawSplash();
 }
