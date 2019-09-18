@@ -10,6 +10,8 @@ function startGame(strategy1, strategy2) {
   document.addEventListener('keyup', handleKeyUp);
   canv.addEventListener("mousedown", handleGameMouseDown);
   canv.addEventListener("mouseup", handleGameMouseUp);
+  canv.addEventListener("touchstart", handleGameTouchDown);
+  canv.addEventListener("touchend", handleGameTouchUp);
 
   resumeGame();
   paused = false;
@@ -71,12 +73,29 @@ function handleGameMouseDown(event) {
   handleGameInteraction(clickX, clickY, "handleClickDown");
 }
 
+
 function handleGameMouseUp(event) {
   clickX = event.pageX;
   clickY = event.pageY;
 
   handleGameInteraction(clickX, clickY, "handleClickUp");
 }
+
+function handleGameTouchDown(event) {
+  clickX = event.changedTouches[0].pageX;
+  clickY = event.changedTouches[0].pageY;
+
+  handleGameInteraction(clickX, clickY, "handleClickDown");
+}
+
+function handleGameTouchUp(event) {
+  clickX = event.changedTouches[0].pageX;
+  clickY = event.changedTouches[0].pageY;
+
+  handleGameInteraction(clickX, clickY, "handleClickUp");
+}
+
+
 
 function handleGameInteraction(clickX, clickY, handleMethod) {
   console.log(clickX, clickY, handleMethod);
