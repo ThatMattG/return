@@ -15,57 +15,8 @@ function startGame(strategy1, strategy2) {
   paused = false;
 }
 
-
-function makeGraphicElements(clickables) {
-  let clickableLU = new OnScreenPaddleControls(0, 0, canv.width /2, canv.height / 2, paddle1, "U");
-  let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height / 2, paddle1, "D");
-  let clickableRU = new OnScreenPaddleControls(canv.width / 2, 0, canv.width /2, canv.height / 2, paddle2, "U");
-  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width /2, canv.height / 2, paddle2, "D");
-  clickables.push(clickableLU);
-  clickables.push(clickableLD);
-  clickables.push(clickableRU);
-  clickables.push(clickableRD);
-}
-
-
-
-
-function handleGameMouseDown(event) {
-  clickX = event.pageX;
-  clickY = event.pageY;
-
-  handleGameInteraction(clickX, clickY, "handleClickDown");
-}
-
-function handleGameMouseUp(event) {
-  clickX = event.pageX;
-  clickY = event.pageY;
-
-  handleGameInteraction(clickX, clickY, "handleClickUp");
-}
-
-function handleGameInteraction(clickX, clickY, handleMethod) {
-  console.log(clickX, clickY, handleMethod);
-
-  for (let index in gameScreenClickables) {
-    let element = gameScreenClickables[index];
-
-    if (element.withinBoundary(clickX, clickY)) {
-      element[handleMethod]();
-      break;
-    }
-  }
-}
-
-
-
-
-function resumeGame() {
-  interval = setInterval(newFrame, 1000 / FPS);
-}
-
 // ============================================================
-// Keyboard bindings
+// Input handling
 // ============================================================
 
 function handleKeyDown(e) {
@@ -113,6 +64,33 @@ function movePaddle(paddle) {
   paddle.move();
 }
 
+function handleGameMouseDown(event) {
+  clickX = event.pageX;
+  clickY = event.pageY;
+
+  handleGameInteraction(clickX, clickY, "handleClickDown");
+}
+
+function handleGameMouseUp(event) {
+  clickX = event.pageX;
+  clickY = event.pageY;
+
+  handleGameInteraction(clickX, clickY, "handleClickUp");
+}
+
+function handleGameInteraction(clickX, clickY, handleMethod) {
+  console.log(clickX, clickY, handleMethod);
+
+  for (let index in gameScreenClickables) {
+    let element = gameScreenClickables[index];
+
+    if (element.withinBoundary(clickX, clickY)) {
+      element[handleMethod]();
+      break;
+    }
+  }
+}
+
 // ============================================================
 // newFrame() runs with set interval
 // ============================================================
@@ -123,7 +101,7 @@ function newFrame() {
 }
 
 // ============================================================
-// Helper functions
+// Pause/resume
 // ============================================================
 
 function togglePause() {
@@ -136,4 +114,23 @@ function togglePause() {
     drawPauseScreen();
     paused = true;
   }
+}
+
+function resumeGame() {
+  interval = setInterval(newFrame, 1000 / FPS);
+}
+
+// ============================================================
+// Creationary
+// ============================================================
+
+function makeGraphicElements(clickables) {
+  let clickableLU = new OnScreenPaddleControls(0, 0, canv.width /2, canv.height / 2, paddle1, "U");
+  let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height / 2, paddle1, "D");
+  let clickableRU = new OnScreenPaddleControls(canv.width / 2, 0, canv.width /2, canv.height / 2, paddle2, "U");
+  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width /2, canv.height / 2, paddle2, "D");
+  clickables.push(clickableLU);
+  clickables.push(clickableLD);
+  clickables.push(clickableRU);
+  clickables.push(clickableRD);
 }

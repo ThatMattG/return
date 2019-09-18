@@ -24,6 +24,9 @@ var paddle1;
 var player1;
 var player2;
 
+// ============================================================
+// Creationary
+// ============================================================
 
 // Create the ball and paddles
 function makeGameElements(strategy1, strategy2) {
@@ -100,8 +103,6 @@ function updateGame() {
     ball = makeNewBall(scores);
   }
 
-  // bothPaddles(movePaddle); // Replacing this with call via player
-  // bothPlayers(move);
   player1.move();
   player2.move();
 }
