@@ -1,6 +1,11 @@
 var interval;
 var paused = true;
 var gameScreenClickables = [];
+var firefox = false;
+if(navigator.userAgent.indexOf("Firefox") != -1 )
+{
+     firefox = true;
+}
 
 function startGame(strategy1, strategy2) {
   makeGameElements(strategy1, strategy2);
@@ -12,8 +17,11 @@ function startGame(strategy1, strategy2) {
   canv.addEventListener("pointerup", handlePointerUp);
   canv.addEventListener("mousedown", handleGameMouseDown);
   canv.addEventListener("mouseup", handleGameMouseUp);
-  // canv.addEventListener("touchstart", handleGameTouchDown);
-  // canv.addEventListener("touchend", handleGameTouchUp);
+  if (firefox === true) {
+    console.log("firefox")
+    canv.addEventListener("touchstart", handleGameTouchDown);
+    canv.addEventListener("touchend", handleGameTouchUp);
+  }
 
   // $("*").on("touchstart touchend touchcancel touchmove", function(e) { e.preventDefault(); });
 
