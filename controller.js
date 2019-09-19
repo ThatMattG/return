@@ -8,6 +8,8 @@ function startGame(strategy1, strategy2) {
 
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
+  // canv.addEventListener("pointerdown", handlePointerDown);
+  // canv.addEventListener("pointerup", handlePointerUp);
   canv.addEventListener("mousedown", handleGameMouseDown);
   canv.addEventListener("mouseup", handleGameMouseUp);
   canv.addEventListener("touchstart", handleGameTouchDown);
@@ -17,6 +19,24 @@ function startGame(strategy1, strategy2) {
 
   resumeGame();
   paused = false;
+}
+
+function handlePointerDown(event) {
+  // console.log(event);
+  // console.log(event.data);
+
+  let clickX = event.clientX;
+  let clickY = event.clientY;
+  handleGameInteraction(clickX, clickY, "handleClickDown");
+}
+
+function handlePointerUp(event) {
+  // console.log(event);
+  // console.log(event.data);
+
+  let clickX = event.clientX;
+  let clickY = event.clientY;
+  handleGameInteraction(clickX, clickY, "handleClickUp");
 }
 
 // ============================================================
@@ -102,7 +122,7 @@ function handleGameTouchUp(event) {
 }
 
 function handleGameInteraction(clickX, clickY, handleMethod, calledFrom) {
-  // console.log(clickX, clickY, handleMethod, calledFrom);
+  console.log(clickX, clickY, handleMethod, calledFrom);
 
   for (let index in gameScreenClickables) {
     let element = gameScreenClickables[index];
