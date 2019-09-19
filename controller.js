@@ -1,6 +1,7 @@
 var interval;
 var paused = true;
 var gameScreenClickables = [];
+var pauseButton;
 var firefox = false;
 if(navigator.userAgent.indexOf("Firefox") != -1 )
 {
@@ -146,12 +147,11 @@ function handleGameInteraction(clickX, clickY, handleMethod, calledFrom) {
 
     if (element.withinBoundary(clickX, clickY)) {
       element[handleMethod]();
-      return;
+      break;
+      // return; // Choose whether to break out of loop or not
     }
   }
 }
-
-stopPaddle
 
 // ============================================================
 // newFrame() runs with set interval
@@ -172,10 +172,14 @@ function togglePause() {
     removePauseScreen();
     paused = false;
   } else {
-    clearInterval(interval);
-    drawPauseScreen();
-    paused = true;
+    pauseGame();
   }
+}
+
+function pauseGame() {
+  clearInterval(interval);
+  drawPauseScreen();
+  paused = true;
 }
 
 function resumeGame() {
@@ -187,6 +191,9 @@ function resumeGame() {
 // ============================================================
 
 function makeGraphicElements(clickables) {
+  pauseButton = new PauseControl(canv.width / 3, canvas.height * 0.8, canv.width / 3, canv.height * 0.2, "grey", "yellow");
+  clickables.push(pauseButton);
+
   let clickableLU = new OnScreenPaddleControls(0, - canv.height / 2, canv.width /2, canv.height, paddle1, "U");
   let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height, paddle1, "D");
   let clickableRU = new OnScreenPaddleControls(canv.width / 2, - canv.height / 2, canv.width /2, canv.height, paddle2, "U");

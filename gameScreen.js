@@ -9,6 +9,7 @@ function drawGame() {
   drawBall();
   drawPaddles();
   drawScores();
+  drawPauseButton();
 }
 
 function drawGameCanvas(opacity=standardOpacity) {
@@ -90,4 +91,8 @@ function drawPauseMessage(color1, color2) {
 function removePauseScreen() {
   drawPauseMessage("black", "black") // Removes grey smear
   drawGame(1); // The existing frame is re-drawn before updates occur
+}
+
+function drawPauseButton() {
+  pauseButton.draw();
 }

@@ -6,9 +6,9 @@ DONE
 - random ball colours
 - start screen
 - 1 player mode (decision-making)
+- click zones (touch screen)
 
 DOING
-- click zones (touch screen)
 
 TO DO
 - winner (10 pts?)
