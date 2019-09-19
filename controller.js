@@ -8,12 +8,12 @@ function startGame(strategy1, strategy2) {
 
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
-  // canv.addEventListener("pointerdown", handlePointerDown);
-  // canv.addEventListener("pointerup", handlePointerUp);
-  canv.addEventListener("mousedown", handleGameMouseDown);
-  canv.addEventListener("mouseup", handleGameMouseUp);
-  canv.addEventListener("touchstart", handleGameTouchDown);
-  canv.addEventListener("touchend", handleGameTouchUp);
+  canv.addEventListener("pointerdown", handlePointerDown);
+  canv.addEventListener("pointerup", handlePointerUp);
+  // canv.addEventListener("mousedown", handleGameMouseDown);
+  // canv.addEventListener("mouseup", handleGameMouseUp);
+  // canv.addEventListener("touchstart", handleGameTouchDown);
+  // canv.addEventListener("touchend", handleGameTouchUp);
 
   // $("*").on("touchstart touchend touchcancel touchmove", function(e) { e.preventDefault(); });
 
