@@ -14,17 +14,17 @@ function startGame(strategy1, strategy2) {
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
 
-  canv.addEventListener("pointerdown", handlePointerDown);
-  canv.addEventListener("pointerup", handlePointerUp);
+  document.addEventListener("pointerdown", handlePointerDown);
+  document.addEventListener("pointerup", handlePointerUp);
 
-  canv.addEventListener("mousedown", handleGameMouseDown);
-  canv.addEventListener("mouseup", handleGameMouseUp);
+  document.addEventListener("mousedown", handleGameMouseDown);
+  document.addEventListener("mouseup", handleGameMouseUp);
 
   if (firefox === true) {
     console.log("firefox")
-    canv.addEventListener("touchstart", handleGameTouchDown);
+    document.addEventListener("touchstart", handleGameTouchDown);
   }
-  canv.addEventListener("touchend", handleGameTouchUp);
+  document.addEventListener("touchend", handleGameTouchUp);
 
   // $("*").on("touchstart touchend touchcancel touchmove", function(e) { e.preventDefault(); });
 
@@ -123,8 +123,6 @@ function handleGameTouchDown(event) {
   newFrame();
 }
 
-
-
 function handleGameTouchUp(event) {
   clickX = Math.round(event.changedTouches[0].pageX);
   clickY = Math.round(event.changedTouches[0].pageY);
@@ -135,15 +133,25 @@ function handleGameTouchUp(event) {
 function handleGameInteraction(clickX, clickY, handleMethod, calledFrom) {
   console.log(clickX, clickY, handleMethod, calledFrom);
 
+  // Set the associated paddle
+  let paddle;
+  if (clickX < canv.width / 2) {
+    paddle = paddle1;
+  } else {
+    paddle = paddle2;
+  }
+
   for (let index in gameScreenClickables) {
     let element = gameScreenClickables[index];
 
     if (element.withinBoundary(clickX, clickY)) {
       element[handleMethod]();
-      break;
+      return;
     }
   }
 }
+
+stopPaddle
 
 // ============================================================
 // newFrame() runs with set interval
@@ -179,10 +187,10 @@ function resumeGame() {
 // ============================================================
 
 function makeGraphicElements(clickables) {
-  let clickableLU = new OnScreenPaddleControls(0, 0, canv.width /2, canv.height / 2, paddle1, "U");
-  let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height / 2, paddle1, "D");
-  let clickableRU = new OnScreenPaddleControls(canv.width / 2, 0, canv.width /2, canv.height / 2, paddle2, "U");
-  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width /2, canv.height / 2, paddle2, "D");
+  let clickableLU = new OnScreenPaddleControls(0, - canv.height / 2, canv.width /2, canv.height, paddle1, "U");
+  let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height, paddle1, "D");
+  let clickableRU = new OnScreenPaddleControls(canv.width / 2, - canv.height / 2, canv.width /2, canv.height, paddle2, "U");
+  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width / 2, canv.height, paddle2, "D");
   clickables.push(clickableLU);
   clickables.push(clickableLD);
   clickables.push(clickableRU);
