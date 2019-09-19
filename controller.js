@@ -8,10 +8,12 @@ function startGame(strategy1, strategy2) {
 
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
-  // canv.addEventListener("mousedown", handleGameMouseDown);
-  // canv.addEventListener("mouseup", handleGameMouseUp);
+  canv.addEventListener("mousedown", handleGameMouseDown);
+  canv.addEventListener("mouseup", handleGameMouseUp);
   canv.addEventListener("touchstart", handleGameTouchDown);
   canv.addEventListener("touchend", handleGameTouchUp);
+
+  // $("*").on("touchstart touchend touchcancel touchmove", function(e) { e.preventDefault(); });
 
   resumeGame();
   paused = false;
@@ -70,7 +72,7 @@ function handleGameMouseDown(event) {
   clickX = event.pageX;
   clickY = event.pageY;
 
-  handleGameInteraction(clickX, clickY, "handleClickDown");
+  handleGameInteraction(clickX, clickY, "handleClickDown", "mouse Down");
 }
 
 
@@ -78,27 +80,29 @@ function handleGameMouseUp(event) {
   clickX = event.pageX;
   clickY = event.pageY;
 
-  handleGameInteraction(clickX, clickY, "handleClickUp");
+  handleGameInteraction(clickX, clickY, "handleClickUp", "mouse Up");
 }
 
 function handleGameTouchDown(event) {
+  newFrame();
   clickX = Math.round(event.changedTouches[0].pageX);
   clickY = Math.round(event.changedTouches[0].pageY);
 
-  handleGameInteraction(clickX, clickY, "handleClickDown");
+  handleGameInteraction(clickX, clickY, "handleClickDown", "touch Down");
+  newFrame();
 }
+
+
 
 function handleGameTouchUp(event) {
   clickX = Math.round(event.changedTouches[0].pageX);
   clickY = Math.round(event.changedTouches[0].pageY);
 
-  handleGameInteraction(clickX, clickY, "handleClickUp");
+  handleGameInteraction(clickX, clickY, "handleClickUp", "touch Up");
 }
 
-
-
-function handleGameInteraction(clickX, clickY, handleMethod) {
-  console.log(clickX, clickY, handleMethod);
+function handleGameInteraction(clickX, clickY, handleMethod, calledFrom) {
+  // console.log(clickX, clickY, handleMethod, calledFrom);
 
   for (let index in gameScreenClickables) {
     let element = gameScreenClickables[index];

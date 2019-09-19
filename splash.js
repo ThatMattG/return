@@ -50,12 +50,12 @@ function handleSplashClick(event) {
   handleSplashInteraction(clickX, clickY);
 }
 
-function handleSplashTouch(event) {
-  clickX = event.changedTouches[0].pageX;
-  clickY = event.changedTouches[0].pageY;
-
-  handleSplashInteraction(clickX, clickY);
-}
+// function handleSplashTouch(event) {
+//   clickX = event.changedTouches[0].pageX;
+//   clickY = event.changedTouches[0].pageY;
+//
+//   handleSplashInteraction(clickX, clickY);
+// }
 
 function handleSplashInteraction(clickX, clickY) {
   console.log(event);
