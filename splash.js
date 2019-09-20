@@ -26,7 +26,7 @@ function makeModes(elements) {
       width,
       height,
       "beige",
-      "black"
+      undefined
   );
   elements.push(strategySelector1);
 
@@ -37,25 +37,18 @@ function makeModes(elements) {
       width,
       height,
       "beige",
-      "black"
+      undefined
   );
   elements.push(strategySelector2);
 
 }
 
 function handleSplashClick(event) {
-  clickX = event.pageX;
-  clickY = event.pageY;
+  clickX = event.offsetX;
+  clickY = event.offsetY;
 
   handleSplashInteraction(clickX, clickY);
 }
-
-// function handleSplashTouch(event) {
-//   clickX = event.changedTouches[0].pageX;
-//   clickY = event.changedTouches[0].pageY;
-//
-//   handleSplashInteraction(clickX, clickY);
-// }
 
 function handleSplashInteraction(clickX, clickY) {
   console.log(event);

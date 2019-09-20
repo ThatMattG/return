@@ -15,15 +15,15 @@ function startGame(strategy1, strategy2) {
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
 
-  document.addEventListener("pointerdown", handlePointerDown);
+  canv.addEventListener("pointerdown", handlePointerDown);
   document.addEventListener("pointerup", handlePointerUp);
 
-  document.addEventListener("mousedown", handleGameMouseDown);
+  canv.addEventListener("mousedown", handleGameMouseDown);
   document.addEventListener("mouseup", handleGameMouseUp);
 
   if (firefox === true) {
     console.log("firefox")
-    document.addEventListener("touchstart", handleGameTouchDown);
+    canv.addEventListener("touchstart", handleGameTouchDown);
   }
   document.addEventListener("touchend", handleGameTouchUp);
 
@@ -31,24 +31,6 @@ function startGame(strategy1, strategy2) {
 
   resumeGame();
   paused = false;
-}
-
-function handlePointerDown(event) {
-  // console.log(event);
-  // console.log(event.data);
-
-  let clickX = event.clientX;
-  let clickY = event.clientY;
-  handleGameInteraction(clickX, clickY, "handleClickDown");
-}
-
-function handlePointerUp(event) {
-  // console.log(event);
-  // console.log(event.data);
-
-  let clickX = event.clientX;
-  let clickY = event.clientY;
-  handleGameInteraction(clickX, clickY, "handleClickUp");
 }
 
 // ============================================================
@@ -100,17 +82,36 @@ function movePaddle(paddle) {
   paddle.move();
 }
 
+function handlePointerDown(event) {
+  console.log(event);
+  console.log(event.data);
+  console.log(canv);
+
+  let clickX = event.clientX;
+  let clickY = event.clientY;
+  handleGameInteraction(clickX, clickY, "handleClickDown", "pointer Down");
+}
+
+function handlePointerUp(event) {
+  // console.log(event);
+  // console.log(event.data);
+
+  let clickX = event.clientX;
+  let clickY = event.clientY;
+  handleGameInteraction(clickX, clickY, "handleClickUp", "pointer Up");
+}
+
 function handleGameMouseDown(event) {
-  clickX = event.pageX;
-  clickY = event.pageY;
+  clickX = event.offsetX;
+  clickY = event.offsetY;
 
   handleGameInteraction(clickX, clickY, "handleClickDown", "mouse Down");
 }
 
 
 function handleGameMouseUp(event) {
-  clickX = event.pageX;
-  clickY = event.pageY;
+  clickX = event.offsetX;
+  clickY = event.offsetY;
 
   handleGameInteraction(clickX, clickY, "handleClickUp", "mouse Up");
 }
@@ -169,8 +170,6 @@ function newFrame() {
 function togglePause() {
   if (paused) {
     resumeGame();
-    removePauseScreen();
-    paused = false;
   } else {
     pauseGame();
   }
@@ -184,6 +183,8 @@ function pauseGame() {
 
 function resumeGame() {
   interval = setInterval(newFrame, 1000 / FPS);
+  removePauseScreen();
+  paused = false;
 }
 
 // ============================================================
