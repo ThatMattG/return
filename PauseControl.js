@@ -6,15 +6,6 @@ class PauseControl extends GraphicRectangle {
   }
 
   draw() {
-    // // Delete this rectangle stuff
-    // ctx.beginPath();
-    // ctx.fillStyle = this.fillColor;
-    // ctx.strokeStyle = this.strokeColor;
-    // ctx.rect(this.xStart, this.yStart, this.width, this.height);
-    // ctx.closePath();
-    // ctx.fill();
-    // ctx.stroke();
-
     ctx.font = "20px Courier";
     ctx.fillStyle = "silver";
 
@@ -26,14 +17,6 @@ class PauseControl extends GraphicRectangle {
 
   handleClickDown() {
     this.delayedPauseToggle();
-
-    // if (paused === false) {
-    //   pauseGame();
-    // }
-
-    // togglePause();
-    // pauseGame();
-    // paused = true;
   }
 
   handleClickUp() {

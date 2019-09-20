@@ -15,19 +15,17 @@ function startGame(strategy1, strategy2) {
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
 
-  canv.addEventListener("pointerdown", handlePointerDown);
+  document.addEventListener("pointerdown", handlePointerDown);
   document.addEventListener("pointerup", handlePointerUp);
 
-  canv.addEventListener("mousedown", handleGameMouseDown);
+  document.addEventListener("mousedown", handleGameMouseDown);
   document.addEventListener("mouseup", handleGameMouseUp);
 
   if (firefox === true) {
     console.log("firefox")
-    canv.addEventListener("touchstart", handleGameTouchDown);
+    document.addEventListener("touchstart", handleGameTouchDown);
   }
   document.addEventListener("touchend", handleGameTouchUp);
-
-  // $("*").on("touchstart touchend touchcancel touchmove", function(e) { e.preventDefault(); });
 
   resumeGame();
   paused = false;
@@ -83,35 +81,30 @@ function movePaddle(paddle) {
 }
 
 function handlePointerDown(event) {
-  console.log(event);
-  console.log(event.data);
-  console.log(canv);
+  let clickX = Math.round(event.clientX);
+  let clickY = Math.round(event.clientY);
 
-  let clickX = event.clientX;
-  let clickY = event.clientY;
   handleGameInteraction(clickX, clickY, "handleClickDown", "pointer Down");
 }
 
 function handlePointerUp(event) {
-  // console.log(event);
-  // console.log(event.data);
+  let clickX = Math.round(event.clientX);
+  let clickY = Math.round(event.clientY);
 
-  let clickX = event.clientX;
-  let clickY = event.clientY;
   handleGameInteraction(clickX, clickY, "handleClickUp", "pointer Up");
 }
 
 function handleGameMouseDown(event) {
-  clickX = event.offsetX;
-  clickY = event.offsetY;
+  clickX = event.pageX;
+  clickY = event.pageY;
 
   handleGameInteraction(clickX, clickY, "handleClickDown", "mouse Down");
 }
 
 
 function handleGameMouseUp(event) {
-  clickX = event.offsetX;
-  clickY = event.offsetY;
+  clickX = event.pageX;
+  clickY = event.pageY;
 
   handleGameInteraction(clickX, clickY, "handleClickUp", "mouse Up");
 }
@@ -135,21 +128,15 @@ function handleGameTouchUp(event) {
 function handleGameInteraction(clickX, clickY, handleMethod, calledFrom) {
   console.log(clickX, clickY, handleMethod, calledFrom);
 
-  // Set the associated paddle
-  let paddle;
-  if (clickX < canv.width / 2) {
-    paddle = paddle1;
-  } else {
-    paddle = paddle2;
-  }
+  relativeX = clickX - canv.offsetLeft;
+  relativeY = clickY - canv.offsetTop;
 
   for (let index in gameScreenClickables) {
     let element = gameScreenClickables[index];
 
-    if (element.withinBoundary(clickX, clickY)) {
+    if (element.withinBoundary(relativeX, relativeY)) {
       element[handleMethod]();
-      break;
-      // return; // Choose whether to break out of loop or not
+      break;  // Needed to prevent paddle move when hitting pause button
     }
   }
 }

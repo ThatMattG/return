@@ -51,8 +51,6 @@ function handleSplashClick(event) {
 }
 
 function handleSplashInteraction(clickX, clickY) {
-  console.log(event);
-
   let elementClicked = false;
 
   for (let index in splashScreenElements) {

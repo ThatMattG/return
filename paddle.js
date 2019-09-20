@@ -30,4 +30,4 @@ Paddle.prototype.move = function(dir) {
 
 Paddle.prototype.stop = function () {
   this.speed = 0;
-};
+}
