@@ -182,10 +182,10 @@ function makeGraphicElements(clickables) {
   pauseButton = new PauseControl(canv.width / 3, canvas.height * 0.8, canv.width / 3, canv.height * 0.2, "grey", "yellow");
   clickables.push(pauseButton);
 
-  let clickableLU = new OnScreenPaddleControls(0, - canv.height / 2, canv.width /2, canv.height, paddle1, "U");
-  let clickableLD = new OnScreenPaddleControls(0, canv.height / 2, canv.width /2, canv.height, paddle1, "D");
-  let clickableRU = new OnScreenPaddleControls(canv.width / 2, - canv.height / 2, canv.width /2, canv.height, paddle2, "U");
-  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width / 2, canv.height, paddle2, "D");
+  let clickableLU = new OnScreenPaddleControls(- canv.width / 2, - canv.height / 2, canv.width, canv.height, paddle1, "U");
+  let clickableLD = new OnScreenPaddleControls(- canv.width / 2, canv.height / 2, canv.width, canv.height, paddle1, "D");
+  let clickableRU = new OnScreenPaddleControls(canv.width / 2, - canv.height / 2, canv.width, canv.height, paddle2, "U");
+  let clickableRD = new OnScreenPaddleControls(canv.width / 2, canv.height / 2, canv.width, canv.height, paddle2, "D");
   clickables.push(clickableLU);
   clickables.push(clickableLD);
   clickables.push(clickableRU);
